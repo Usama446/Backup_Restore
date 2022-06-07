@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<head>
+    <title>Backup Data</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/js/select2.min.js" integrity="sha512-qiKM6FJbI5x5+GL5CEbAUK0suRhjXVMRXnH/XQJaaQ6iQPf05XxbFBE4jS6VJzPGIRg7xREZTrGJIZVk1MLclA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0-beta.1/css/select2.min.css" integrity="sha512-yI2XOLiLTQtFA9IYePU0Q1Wt0Mjm/UkmlKMy4TU4oNXEws0LybqbifbO8t9rEIU65qdmtomQEQ+b3XfLfCzNaw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+    <script>
+        $(document).ready(function()
+        {
+            $("#databaseselect,#tableselect").select2({
+                placeholder:'Select Data ...',
+            });
+            
+        });
+    </script>
+</head>
+
+<!-- <body style="background: SlateGray; margin:0px; padding:0px"> -->
+<body style="background: #4A235A; margin:0px; padding:0px">
+    <center>
+        <h1 style="color: #16F7DB;">Backup Data</h1>
+        <hr/>
+        <form action="{% url 'selected_database_backup' %}">
+        <select name="selected_database_bp" id="databaseselect" style="width: 400px;">
+            <option disabled="true" selected>Select Database for Backup</option>
+            {% for result in data2 %}
+            <option>{{result}}</option>
+            {% endfor %}
+        </select><br><br>
+        <input type="submit" value="Backup Selected Database" style="width: 250px;background: #3354AB;height: 30px;color: white;border-radius: 10px;font-family: 'Gill Sans';font-size: 17px;font-weight: bold;">
+        </form><br><br>
+
+
+        <form action="{% url 'selected_table_backup' %}">
+            <select name="selected_table_bp" id="tableselect" style="width: 400px;">
+                <option disabled="true" selected >Select Table for Backup</option>
+                {% for result in data %}
+                <option>{{result}}</option>
+                {% endfor %}
+            </select><br><br>
+            <input type="submit" value="Backup Selected Table" style="width: 250px;background: #3354AB;height: 30px;color: white;border-radius: 10px;font-family: 'Gill Sans';font-size: 17px;font-weight: bold;">
+            </form><br><br><br><br>
+
+        <button onclick="location.href='{% url 'backup_db' %}'" style="width: 250px;background: #46906F;height: 30px;color: white;border-radius: 10px;font-family: 'Gill Sans';font-size: 17px;"><b>Backup All Database</b></button><br><br>
+        <button onclick="location.href='{% url 'backup_tbl' %}'" style="width: 250px;background: #46906F;height: 30px;color: white;border-radius: 10px;font-family: 'Gill Sans';font-size: 17px;"><b>Backup All Tables</b></button><br><br><br><br>
+        <button onclick="location.href='{% url 'show' %}'" style="width: 250px;background: #3354AB;height: 50px;color: white;border-radius: 10px;font-family: 'Gill Sans';font-size: 17px;"><b>Go To Restore Page</b></button><br><br>
+    </center>
+</body>
+</html>
